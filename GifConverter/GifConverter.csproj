@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Convert</AssemblyName>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DebugSymbols>true</DebugSymbols>
+      <DebugType>embedded</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="config.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FFMpegCore" Version="5.1.0" />
+      <PackageReference Include="PhotoSauce.MagicScaler" Version="0.14.2" />
+    </ItemGroup>
+
+    <Target Name="CreateFolder" AfterTargets="Publish">
+      <MakeDir Directories="$(PublishDir)input" Condition="!Exists('$(PublishDir)input')" />
+    </Target>
+    
+</Project>
